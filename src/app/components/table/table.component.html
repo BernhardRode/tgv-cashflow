@@ -1,0 +1,57 @@
+<div class="overview">
+  <div class="overview-categories">
+    <table>
+      <thead>
+        <tr>
+          <th>Overview</th>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let section of SECTIONS">
+        <tr class="section">
+          <td>
+            <b>{{section.name}}</b>
+          </td>
+        </tr>
+        <tr *ngFor="let subsection of section.subsections">
+          <td>{{subsection}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="overview-year" *ngFor="let year of years.reverse()">
+    <table>
+      <thead>
+        <tr>
+          <th>{{START_YEAR + year}}</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th *ngFor="let month of months">
+            {{monthNames[month]}}
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let section of SECTIONS">
+        <tr class="section">
+          <td>
+            {{sumSectionYear(section, subsection, year)}}
+          </td>
+          <td *ngFor="let month of months">
+            {{sumSectionMonth(section, subsection, year, month)}}
+          </td>
+        </tr>
+        <tr *ngFor="let subsection of section.subsections">
+          <td>
+            {{sumSubsectionYear(section ,subsection, year)}}
+          </td>
+          <td *ngFor="let month of months">
+            {{sumSubsectionMonth(section, subsection, year, month)}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

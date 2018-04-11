@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" class="app-toolbar mat-elevation-z6">
+  <mat-toolbar-row>
+    <img [src]="user.photoURL" *ngIf="user.photoURL" height="25">
+    <span>Hallo {{ user.displayName }}!</span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>power_settings_new</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

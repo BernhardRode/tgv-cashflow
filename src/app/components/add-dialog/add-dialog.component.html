@@ -3,20 +3,20 @@
   <mat-dialog-content>
     <div class="form">
       <mat-form-field>
-        <input matInput [matDatepicker]="addDialogDate" required formControlName="date">
+        <input matInput type="number" placeholder="Betrag" formControlName="value">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="addDialogDate" formControlName="date">
         <mat-datepicker-toggle matSuffix [for]="addDialogDate"></mat-datepicker-toggle>
         <mat-datepicker #addDialogDate></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Kategorie" formControlName="section" required>
-          <mat-option value="">Bitte eine Kategorie auswählen.</mat-option>
+        <mat-select placeholder="Kategorie" formControlName="section" (change)="onChangeSection($event)">
           <mat-option [value]="section.name" *ngFor="let section of sections">{{section.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Unterkategorie" formControlName="category" [disabled]="addDialogForm.controls.section.value === ''"
-          required>
-          <mat-option value="">Bitte eine Unterkategorie auswählen.</mat-option>
+        <mat-select placeholder="Unterkategorie" formControlName="category">
           <mat-option [value]="subsection" *ngFor="let subsection of subsections">{{subsection}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -27,6 +27,6 @@
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button (click)="cancel()">Abbrechen</button>
-    <button mat-raised-button type="submit" [disabled]="addDialogForm.pristine" color="primary">Hinzufügen</button>
+    <button mat-raised-button type="submit" [disabled]="!addDialogForm.valid" color="primary">Hinzufügen</button>
   </mat-dialog-actions>
 </form>

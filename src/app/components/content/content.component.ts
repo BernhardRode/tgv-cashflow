@@ -20,18 +20,19 @@ export class ContentComponent implements OnInit {
   constructor(public dialog: MatDialog, private afs: AngularFirestore) {
     this.bookingsCollection = afs.collection<Booking>('bookings');
     this.bookings = this.bookingsCollection.valueChanges();
+    const today = new Date();
+
     this.booking = {
-      year: new Date().getFullYear(),
-      month: new Date().getMonth(),
-      day: new Date().getDay(),
+      year: today.getFullYear(),
+      month: today.getMonth(),
+      day: today.getDate(),
       category: '',
-      section: ''
+      section: '',
+      value: 0
     };
   }
 
-  ngOnInit(): void {
-    this.add();
-  }
+  ngOnInit(): void {}
 
   add(): void {
     const width = '700px';
@@ -53,5 +54,7 @@ export class ContentComponent implements OnInit {
     this.bookingsCollection.add(booking);
   }
 
-  private removeBooking(booking: Booking): void {}
+  private removeBooking(booking: Booking): void {
+    console.log('removeBooking', booking);
+  }
 }

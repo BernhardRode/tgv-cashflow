@@ -7,7 +7,7 @@ import Booking from '../../models/Booking';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, OnDestroy {
   START_YEAR = 2000;
@@ -25,8 +25,8 @@ export class TableComponent implements OnInit, OnDestroy {
         'Jugendzuschuss, Koop TGV-HCG u.Ä.',
         'Pacht',
         'Nebenkosten',
-        'Miete Vereinszimmer',
-      ],
+        'Miete Vereinszimmer'
+      ]
     },
     {
       name: 'Einnahmen variabel',
@@ -35,8 +35,8 @@ export class TableComponent implements OnInit, OnDestroy {
         'Steuerrückzahlung',
         'Bottwartalmarathon',
         'Forderungen von HV an Abt.',
-        'Sonstige Einnahmen',
-      ],
+        'Sonstige Einnahmen'
+      ]
     },
     {
       name: 'Ausgaben fix',
@@ -53,8 +53,8 @@ export class TableComponent implements OnInit, OnDestroy {
         'Tennisvereinsheim',
         'Kopierer, Abos',
         'Jahresfeier',
-        'Steuerberater',
-      ],
+        'Steuerberater'
+      ]
     },
     {
       name: 'Ausgaben variabel',
@@ -71,9 +71,9 @@ export class TableComponent implements OnInit, OnDestroy {
         'Tennisvereinsheim',
         'Kopierer, Abos',
         'Jahresfeier',
-        'Steuerberater',
-      ],
-    },
+        'Steuerberater'
+      ]
+    }
   ];
   years = [];
   months = Array.from({ length: 12 }, (x, i) => i);
@@ -89,7 +89,7 @@ export class TableComponent implements OnInit, OnDestroy {
     'September',
     'Oktober',
     'November',
-    'Dezember',
+    'Dezember'
   ];
 
   bookings: Observable<any[]>;
@@ -100,7 +100,7 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const collection: AngularFirestoreCollection<Booking> = this.afs.collection('bookings');
+    // const collection: AngularFirestoreCollection<Booking> = this.afs.collection('bookings');
   }
 
   ngOnDestroy() {}

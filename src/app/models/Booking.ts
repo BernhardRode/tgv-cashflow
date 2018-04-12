@@ -7,4 +7,5 @@ export default interface Booking {
   month: number;
   year: number;
   comments?: Array<Comment>;
+  value: number;
 };

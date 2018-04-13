@@ -1,106 +1,35 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import Booking from '../../models/Booking';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() bookings: Array<Booking | any>;
+
   START_YEAR = 2000;
   END_YEAR = new Date().getFullYear();
-  SECTIONS = [
-    {
-      name: 'Einnahmen fix',
-      subsections: [
-        'Mitgliedsbeiträge',
-        'Abteilungsbeiträge',
-        'Kurse, FFZ',
-        'Beiträge Arbeitsstd., Verzehrbons',
-        'WLSB ÜL-Zuschuss',
-        'Zuschuss Stadt Betriebskosten',
-        'Jugendzuschuss, Koop TGV-HCG u.Ä.',
-        'Pacht',
-        'Nebenkosten',
-        'Miete Vereinszimmer'
-      ]
-    },
-    {
-      name: 'Einnahmen variabel',
-      subsections: [
-        'Geldspenden',
-        'Steuerrückzahlung',
-        'Bottwartalmarathon',
-        'Forderungen von HV an Abt.',
-        'Sonstige Einnahmen'
-      ]
-    },
-    {
-      name: 'Ausgaben fix',
-      subsections: [
-        'Personalkosten',
-        'Berufsgenossenschaft',
-        'Abteilungsbeiträge',
-        'Sportstättennutzung',
-        'WLSB, STB',
-        'Tilgung, Zinsen Darlehen',
-        'Strom, Wasser, Gas',
-        'Versicherungen',
-        'Steuer (Vorauszahlung)',
-        'Tennisvereinsheim',
-        'Kopierer, Abos',
-        'Jahresfeier',
-        'Steuerberater'
-      ]
-    },
-    {
-      name: 'Ausgaben variabel',
-      subsections: [
-        'Personalkosten',
-        'Berufsgenossenschaft',
-        'Abteilungsbeiträge',
-        'Sportstättennutzung',
-        'WLSB, STB',
-        'Tilgung, Zinsen Darlehen',
-        'Strom, Wasser, Gas',
-        'Versicherungen',
-        'Steuer (Vorauszahlung)',
-        'Tennisvereinsheim',
-        'Kopierer, Abos',
-        'Jahresfeier',
-        'Steuerberater'
-      ]
-    }
-  ];
   years = [];
   months = Array.from({ length: 12 }, (x, i) => i);
-  monthNames = [
-    'Januar',
-    'Februar',
-    'März',
-    'April',
-    'Mai',
-    'Juni',
-    'Juli',
-    'August',
-    'September',
-    'Oktober',
-    'November',
-    'Dezember'
-  ];
+  sections = environment.sections;
+  monthNames = environment.monthNames;
 
-  bookings: Observable<any[]>;
-  bookings$;
-
-  constructor(private afs: AngularFirestore) {
+  constructor() {
     this.years = Array.from({ length: 1 + this.END_YEAR - this.START_YEAR }, (x, i) => i);
   }
 
-  ngOnInit() {
-    // const collection: AngularFirestoreCollection<Booking> = this.afs.collection('bookings');
+  ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { bookings } = changes;
+    if (!bookings.firstChange) {
+      this.bookings = bookings.currentValue !== null ? bookings.currentValue : [];
+    }
   }
 
   ngOnDestroy() {}

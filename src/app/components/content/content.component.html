@@ -1,12 +1,4 @@
-<!-- <app-table></app-table> -->
-<ul>
-  <li *ngFor="let booking of bookings | async">
-    <pre>
-      {{booking | json}}
-    </pre>
-    <button (click)="remove(booking)">delete</button>
-  </li>
-</ul>
+<app-table [bookings]="bookings | async"></app-table>
 <button mat-fab color="primary" (click)="add()">
   <mat-icon>add</mat-icon>
 </button>

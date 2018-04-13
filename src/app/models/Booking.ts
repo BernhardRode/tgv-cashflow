@@ -1,8 +1,9 @@
 import Comment from './Comment';
 
 export default interface Booking {
-  category: String;
-  section: String;
+  id?: string;
+  category: string;
+  section: string;
   day: number;
   month: number;
   year: number;

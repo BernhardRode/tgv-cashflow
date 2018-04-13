@@ -258,13 +258,9 @@ function toCSV(booking) {
   }"`;
 }
 
-const allBookings = main(COLUMNS, ROWS);
-// const allSum = allBookings.filter(b => isNaN(b.value));
+const bookings = main(COLUMNS, ROWS);
 
-// allBookings.map(toCSV).forEach(element => {
-//   console.log(element);
-// });
-console.log(JSON.stringify(allBookings));
+export default bookings;
 
 // const input = '−10+27420−33−33−33−33−123+60−50+60+97−33+50−50−50+140+20';
 // const result = 27399;

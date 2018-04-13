@@ -19,7 +19,13 @@ export class ContentComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private afs: AngularFirestore) {
     this.bookingsCollection = afs.collection<Booking>('bookings');
-    this.bookings = this.bookingsCollection.valueChanges();
+    this.bookings = this.bookingsCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Booking;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    });
     const today = new Date();
 
     this.booking = {
@@ -55,6 +61,6 @@ export class ContentComponent implements OnInit {
   }
 
   private removeBooking(booking: Booking): void {
-    console.log('removeBooking', booking);
+    this.bookingsCollection.doc(booking.id).delete();
   }
 }

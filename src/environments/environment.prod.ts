@@ -8,6 +8,20 @@ export const environment = {
     storageBucket: 'tgv-cashflow.appspot.com',
     messagingSenderId: '84350516105'
   },
+  monthNames: [
+    'Januar',
+    'Februar',
+    'März',
+    'April',
+    'Mai',
+    'Juni',
+    'Juli',
+    'August',
+    'September',
+    'Oktober',
+    'November',
+    'Dezember'
+  ],
   sections: [
     {
       name: 'Einnahmen fix',
